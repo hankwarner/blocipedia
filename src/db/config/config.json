@@ -24,6 +24,6 @@
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false,
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "postgres://gabatnxwqphkip:9e39692339f55cb86c6e6e2b63dc6e581e7f2b0467a710afec0316e26e698d2e@ec2-54-163-230-178.compute-1.amazonaws.com:5432/dfs2geh03rs95j"
   }
 }

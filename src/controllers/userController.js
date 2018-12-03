@@ -26,7 +26,7 @@ module.exports = {
                 subject: 'Thanks for joining Blocipedia',
                 text: 'Thanks for registering for your free account with Blocipedia!',
                 html: '<strong>Thanks for registering for your free account with Blocipedia!</strong>',
-              };
+            };
 
             if(err){
                 req.flash("error", err);

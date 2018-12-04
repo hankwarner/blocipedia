@@ -34,7 +34,7 @@ module.exports = {
             } else {
                 passport.authenticate("local")(req, res, () => {
                     req.flash("notice", "You've successfully signed in!");
-                    sgMail.setApiKey('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');
+                    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                     sgMail.send(msg);
                     res.redirect("/");
                 })

@@ -1,4 +1,6 @@
 const User = require("./models").User;
+const Wiki = require("./models").Wiki;
+
 const bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -10,6 +12,21 @@ module.exports = {
       username: newUser.username,
       email: newUser.email,
       password: hashedPassword
+    })
+    .then((user) => {
+      callback(null, user);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+
+  getUser(id, callback){
+    return User.findById(id, {
+      include: [  {
+        model: Wiki,
+        as: "wikis"
+      }]
     })
     .then((user) => {
       callback(null, user);

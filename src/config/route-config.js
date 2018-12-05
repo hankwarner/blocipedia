@@ -1,4 +1,5 @@
 const userRoutes = require("../routes/users");
+const wikiRoutes = require("../routes/wikis");
 
 module.exports = {
     init(app){
@@ -6,5 +7,6 @@ module.exports = {
       
       app.use(staticRoutes);
       app.use(userRoutes);
+      app.use(wikiRoutes);
     }
   }

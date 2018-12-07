@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+      <% include ../static/partials/messages.ejs %>
+      
+      <div style="display: flex; align-items:center;">
+        <h1><%= currentUser.username %>'s Profile </h1>
+      </div>
+
+      <p>Email: <%= currentUser.email %> </p>
+      <p>Member level:
+        <% if(currentUser.role === 0) { %> Standard 
+
+            <p>Upgrade to Premium for only $15!</p>
+            <form action="/users/<%= currentUser.id %>/upgrade" method="POST">
+              <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key = "pk_test_Xx4wT5223AG6iECG0ARBRr8E"
+                  data-amount="1500"
+                  data-name="Blocipedia"
+                  data-description="Premium membership"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                  data-locale="auto">
+              </script>
+            </form>
+
+        <% } else if (currentUser.role === 1) { %> Premium
+
+            <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
+              <button type="submit" class="btn btn-danger">Downgrade membership</button>
+            </form>
+
+        <% } else if (currentUser.role === 2) { %> Admin
+            
+        <% } %>
+      </p>
+    </main>
+
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+</html>

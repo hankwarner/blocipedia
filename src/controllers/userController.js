@@ -1,6 +1,7 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
+const stripe = require("stripe")(process.env.STRIPE_TEST_API_KEY);
 
 module.exports = {
     signUp(req, res, next){
@@ -58,6 +59,59 @@ module.exports = {
         req.logout();
         req.flash("notice", "You've successfully signed out!");
         res.redirect("/");
+    },
+
+    show(req, res, next){
+        userQueries.getUser(req.params.id, (err, result) => {
+            if(err || result.id === undefined){
+                req.flash("notice", "No user found with that ID.");
+                res.redirect("/");
+            } else {
+                res.render("users/show", {...result});
+            }
+        })
+    },
+
+    upgrade(req, res, next){
+        const token = req.body.stripeToken;
+        
+        const charge = stripe.charges.create({
+            amount: 15,
+            currency: 'usd',
+            description: 'Premium membership',
+            source: token,
+        })
+
+        userQueries.upgradeRole(req, (err, result) => {
+            if(err || result.id === undefined){
+                req.flash("notice", "No user found with that ID.");
+                res.redirect("users/show");
+            } else {
+                req.flash("notice", "Thank you for becoming a Premium member!");
+                res.render("users/show", {...result});
+            }
+        })
+
+    },
+
+    downgrade(req, res, next){
+        const token = req.body.stripeToken;
+        
+        const refund = stripe.refunds.create({
+            charge: 'ch_y4T9e59zXeMAP0Fq7a04',
+            amount: 1500,
+        });
+
+        userQueries.downgradeRole(req, (err, result) => {
+            if(err || result.id === undefined){
+                req.flash("notice", "No user found with that ID.");
+                res.redirect("users/show");
+            } else {
+                req.flash("notice", "Downgraded to standard membership");
+                res.render("users/show", {...result});
+            }
+        })
+
     }
 
   }

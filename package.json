@@ -33,12 +33,16 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "express-validator": "^5.0.2",
+    "foundation": "^4.2.1-1",
+    "foundation-sites": "^6.5.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.6",
     "sequelize-cli": "^5.4.0",
-    "stripe": "^6.18.0"
+    "stripe": "^6.18.0",
+    "stylus": "^0.54.5",
+    "stylus-type-utils": "0.0.3"
   }
 }

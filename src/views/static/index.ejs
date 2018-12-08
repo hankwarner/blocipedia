@@ -1,45 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title><%= title %></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-
-    <link rel="stylesheet" href="/css/application.css">
-  </head>
+  <% include ../static/partials/head.ejs %>
   <body>
     <% include ../static/partials/navbar.ejs %>
-      <main class="container">
+      <main>
         <% include ../static/partials/messages.ejs %>
-        <header class="jumbotron my-4">
-          <h1 class="display-3">Blocipedia: Social Wikis</h1>
-          <p class="lead">Share your Wikis</p>
-          <a href="/users/signup" class="btn btn-primary btn-lg">Sign up</a>
+        <header>
+          <h1>Blocipedia: Social Wikis</h1>
+          <p>Share your Wikis</p>
+          <a href="/users/signup" class="button">Sign up</a>
         </header>
 
-        <section class="row text-center">
+        <section>
 
-          <section class="col-lg-4">
-            <h4 class="card-title">Create</h4>
-            <p class="card-text">create as many public wiki's as you want!</p>
+          <section>
+            <h4>Create</h4>
+            <p>create as many public wiki's as you want!</p>
           </section>
 
-          <section class="col-lg-4">
-            <h4 class="card-title">Select your plan</h4>
-            <p class="card-text">create private wikis by becoming a premium member, or use the free plan!</p>
+          <section>
+            <h4>Select your plan</h4>
+            <p>create private wikis by becoming a premium member, or use the free plan!</p>
           </section>
 
         </section>
 
       </main>
 
-      <script
-        src="http://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-      </script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <% include ../static/partials/baseScripts.ejs %>
     </body>
 </html>

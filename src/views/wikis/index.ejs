@@ -13,11 +13,26 @@
       <% } %>
       <ul class="list-group">
 
+        <h4>Public</h4>
         <% wikis.forEach((wiki) => { %>
-          <li class="list-group-item">
-            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-          </li>
+          <% if (wiki.private === false) { %>
+            <li class="list-group-item">
+              <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+            </li>
+          <% } %>
         <% }) %>
+
+        <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %>
+          <h4>Private</h4>
+          <% wikis.forEach((wiki) => { %>
+            <% if (wiki.private === true) { %>
+              <li class="list-group-item">
+                <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              </li>
+            <% } %>
+          <% }) %>
+        <% } %>
+
       </ul>
 
     </main>

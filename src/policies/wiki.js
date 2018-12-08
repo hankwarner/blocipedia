@@ -3,7 +3,7 @@ const ApplicationPolicy = require("./application");
 module.exports = class WikiPolicy extends ApplicationPolicy {
 
   new() {
-    if (this.user.isAdmin() || this.user.isStandard()) {
+    if (this.user.id) {
         return true
     }
   }
@@ -13,7 +13,7 @@ module.exports = class WikiPolicy extends ApplicationPolicy {
   }
 
   edit() {
-    if (this.user.isAdmin() || this.user.isStandard()) {
+    if (this.user.id) {
         return true
     }
   }

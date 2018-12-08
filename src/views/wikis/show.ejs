@@ -22,6 +22,12 @@
       <div style="display: flex; align-items:center;">
         <h1><%= wiki.title %></h1>
       </div>
+
+      <% if (wiki.private === true) { %>
+        <h6>Private</h6>
+      <% } else { %>
+        <h6>Public</h6>
+      <% } %>
       
       <p><%= wiki.body %></p>
 

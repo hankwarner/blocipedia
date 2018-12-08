@@ -17,6 +17,17 @@
           <label for="body">Body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Post body"></textarea>
         </div>
+
+        <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %> 
+          <div class="form-group">
+            <label for="private">Make Private?</label>
+            <select class="form-control" name="private" aria-describedby="titleHelp">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>  
+        <% } %>
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </main>

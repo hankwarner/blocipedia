@@ -25,12 +25,19 @@ module.exports = {
 
   create(req, res, next){
     const authorized = new Authorizer(req.user).create();
-    
+    const private = (req) => {
+      if(req.body.private === "true") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     if (authorized) {
       let newWiki = {
         title: req.body.title,
         body: req.body.body,
-        private: false,
+        private: private(req),
         userId: req.user.id
       };
       wikiQueries.addWiki(newWiki, (err, wiki) => {

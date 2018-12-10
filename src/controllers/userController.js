@@ -96,10 +96,13 @@ module.exports = {
     },
 
     downgrade(req, res, next){
-        //prompt user to confirm
-        inquirer
-            .prompt([
-                "are you sure?"
+        inquirer.prompt([
+                {
+                    type: 'confirm',
+                    name: 'toBeDelivered',
+                    message: 'Is this for delivery?',
+                    default: false
+                }
             ])
             .then(answers => {
 

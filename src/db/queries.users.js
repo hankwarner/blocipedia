@@ -65,6 +65,8 @@ module.exports = {
 
       user.update({role: 0}, {where: {id: user.id}})
 
+      Wiki.update({private: false}, {where: {userId: user.id}})
+
       .then((user) => {
         callback(null, user);
       })

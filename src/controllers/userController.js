@@ -96,7 +96,7 @@ module.exports = {
 
     },
 
-    downgrade(req, res, next){        
+    downgrade(req, res, next){
         const token = req.body.stripeToken;
 
         const refund = stripe.refunds.create({

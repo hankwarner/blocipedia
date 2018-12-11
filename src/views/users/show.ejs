@@ -3,17 +3,28 @@
   <head>
     <% include ../static/partials/head.ejs %>
     <script type="text/javascript">
-         function getConfirmation(){
-            var retVal = confirm("Are you sure? All of your private Wikis will become public!");
-            if( retVal == true ){
-               console.log("User wants to continue!");
-               return true;
-            }
-            else{
-               console.log("User does not want to continue!");
-               return false;
-            }
-         }
+      const request = require('request');
+
+      function getConfirmation(){
+        var retVal = confirm("Are you sure? All of your private Wikis will become public!");
+        let options = {
+          url: 'http://http://mockbin.com/request',
+          form: {
+            email: 'me@example.com',
+            password: 'myPassword'
+          }
+        };
+
+
+        if( retVal == true ){
+            return request.post({options, callback})
+        }
+        else{
+            console.log("User does not want to continue!");
+            return false;
+        }
+      }
+
    </script>
   </head>
   <body>
@@ -44,11 +55,9 @@
             </form>
 
         <% } else if (currentUser.role === 1) { %> Premium
-
             <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
-              <button type="submit" class="btn btn-danger" onclick="getConfirmation();">Downgrade membership</button>
+              <input type="button" value="Downgrade membership" onclick="getConfirmation();" />
             </form>
-
         <% } else if (currentUser.role === 2) { %> Admin
             
         <% } %>

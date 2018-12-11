@@ -56,11 +56,13 @@ module.exports = {
 
   show(req, res, next){
       wikiQueries.getWiki(req.params.id, (err, wiki) => {
-        if(err || wiki == null){
+        var markdownWiki = wiki;
+        markdownWiki.body = markdown.toHTML(markdownWiki.body);
+        
+        if(err || markdownWiki == null){
           res.redirect(404, "/");
         } else {
-          markdown.toHTML(wiki);
-          res.render("wikis/show", {wiki});
+          res.render("wikis/show", {markdownWiki});
         }
       })
   },

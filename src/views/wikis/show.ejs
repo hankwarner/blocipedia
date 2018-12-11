@@ -9,27 +9,27 @@
     <main class="container">
       <% include ../static/partials/messages.ejs %>
 
-      <% if(currentUser && (currentUser.isAdmin() || currentUser.id == wiki.userId)) { %>
-        <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+      <% if(currentUser && (currentUser.isAdmin() || currentUser.id == markdownWiki.userId)) { %>
+        <form style="display:initial" action="/wikis/<%= markdownWiki.id %>/destroy" method="post">
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       <% } %>
 
       <% if(currentUser) { %>
-        <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        <a href="/wikis/<%= markdownWiki.id %>/edit" class="btn btn-warning">Edit</a>
       <% } %>
       
       <div style="display: flex; align-items:center;">
-        <h1><%= wiki.title %></h1>
+        <h1><%- markdownWiki.title %></h1>
       </div>
 
-      <% if (wiki.private === true) { %>
+      <% if (markdownWiki.private === true) { %>
         <h6>Private</h6>
       <% } else { %>
         <h6>Public</h6>
       <% } %>
       
-      <p><%= wiki.body %></p>
+      <p><%- markdownWiki.body %></p>
 
     </main>
 

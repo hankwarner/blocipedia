@@ -8,7 +8,7 @@
       function getConfirmation(){
         var retVal = confirm("Are you sure? All of your private Wikis will become public!");
         let options = {
-          url: 'http://http://mockbin.com/request',
+          url: '/users/<%= currentUser.id %>/downgrade',
           form: {
             email: 'me@example.com',
             password: 'myPassword'
@@ -17,7 +17,7 @@
 
 
         if( retVal == true ){
-            return request.post({options, callback})
+          return request.post('/users/<%= currentUser.id %>/downgrade', {form:{key:'value'}})
         }
         else{
             console.log("User does not want to continue!");

@@ -21,7 +21,7 @@
     "faker": "^4.1.0",
     "jasmine": "^3.0.0",
     "morgan": "^1.9.1",
-    "request": "^2.83.0"
+    "request": "^2.88.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",

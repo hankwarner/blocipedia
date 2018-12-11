@@ -7,21 +7,13 @@
 
       function getConfirmation(){
         var retVal = confirm("Are you sure? All of your private Wikis will become public!");
-        let options = {
-          url: '/users/<%= currentUser.id %>/downgrade',
-          form: {
-            email: 'me@example.com',
-            password: 'myPassword'
-          }
-        };
-
 
         if( retVal == true ){
-          return request.post('/users/<%= currentUser.id %>/downgrade', {form:{key:'value'}})
-        }
-        else{
-            console.log("User does not want to continue!");
-            return false;
+          console.log("User does wants to continue!");
+          return true;
+        } else {
+          console.log("User does not want to continue!");
+          return false;
         }
       }
 
@@ -56,7 +48,7 @@
 
         <% } else if (currentUser.role === 1) { %> Premium
             <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
-              <button type="submit" class="btn btn-danger">Downgrade membership</button>
+              <button type="submit" class="btn btn-danger" onclick="getConfirmation();">Downgrade membership</button>
             </form>
         <% } else if (currentUser.role === 2) { %> Admin
             

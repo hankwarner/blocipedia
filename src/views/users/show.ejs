@@ -56,7 +56,7 @@
 
         <% } else if (currentUser.role === 1) { %> Premium
             <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
-              <input type="button" value="Downgrade membership" onclick="getConfirmation();" />
+              <button type="submit" class="btn btn-danger">Downgrade membership</button>
             </form>
         <% } else if (currentUser.role === 2) { %> Admin
             

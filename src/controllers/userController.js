@@ -109,7 +109,7 @@ module.exports = {
                 res.redirect("users/show");
             } else {
                 req.flash("notice", "Downgraded to standard membership");
-                res.render("users/show", {...result});
+                res.render("users/show", {result});
             }
         })
 

@@ -6,12 +6,11 @@
 
       function getConfirmation(){
         var retVal = confirm("Are you sure? All of your private Wikis will become public!");
-        const url = '/users/<%= currentUser.id %>/downgrade';
-        console.log(currentUser);
+        const url = '/users/downgrade';
 
         if( retVal == true ){
           return fetch(url, {
-            method: "POST"
+            method: "POST",
           })
           .then(response => {
             response.json();
@@ -50,11 +49,13 @@
                   data-locale="auto">
               </script>
             </form>
-<!-- action="/users/<%= currentUser.id %>/downgrade" method="POST" -->
+
         <% } else if (currentUser.role === 1) { %> Premium
+          
             <form>
               <input type="submit" value="Downgrade membership" class="btn btn-danger" onclick="getConfirmation();">
             </form>
+
         <% } else if (currentUser.role === 2) { %> Admin
             
         <% } %>

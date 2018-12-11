@@ -97,21 +97,27 @@ module.exports = {
     },
 
     downgrade(req, res, next){
-        const token = req.body.stripeToken;
+        if (confirm("Test")) {
+            const token = req.body.stripeToken;
 
-        const refund = stripe.refunds.create({
-            charge: 'ch_y4T9e59zXeMAP0Fq7a04',
-            amount: 1500,
-        });
+            const refund = stripe.refunds.create({
+                charge: 'ch_y4T9e59zXeMAP0Fq7a04',
+                amount: 1500,
+            });
+    
+            userQueries.downgradeRole(req, (err, result) => {
+                if(err){
+                    req.flash("notice", "No user found with that ID.");
+                    res.redirect("users/show");
+                } else {
+                    req.flash("notice", "Downgraded to standard membership");
+                    res.render("users/show", {...result});
+                }
+            })
+        } else {
+            req.flash("notice", "We're thrilled to see you stay! Downgrade was NOT processed.");
+            req.redirect("users/show");
+        }
 
-        userQueries.downgradeRole(req, (err, result) => {
-            if(err){
-                req.flash("notice", "No user found with that ID.");
-                res.redirect("users/show");
-            } else {
-                req.flash("notice", "Downgraded to standard membership");
-                res.render("users/show", {...result});
-            }
-        })
     }
   }

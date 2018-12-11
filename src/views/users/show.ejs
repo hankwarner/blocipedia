@@ -3,29 +3,18 @@
   <head>
     <% include ../static/partials/head.ejs %>
     <script type="text/javascript">
-      const request = require('request');
-
       function getConfirmation(){
-        var retVal = confirm("Are you sure? All of your private Wikis will become public!");
-        let options = {
-          url: '/users/<%= currentUser.id %>/downgrade',
-          form: {
-            email: 'me@example.com',
-            password: 'myPassword'
-          }
-        };
-
-
-        if( retVal == true ){
-          return request.post('/users/<%= currentUser.id %>/downgrade', {form:{key:'value'}})
-        }
-        else{
+         var retVal = confirm("Are you sure? All of your private Wikis will become public!");
+         if( retVal == true ){
+            console.log("User wants to continue!");
+            return true;
+         }
+         else{
             console.log("User does not want to continue!");
             return false;
-        }
+         }
       }
-
-   </script>
+    </script>
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
@@ -56,7 +45,7 @@
 
         <% } else if (currentUser.role === 1) { %> Premium
             <form action="/users/<%= currentUser.id %>/downgrade" method="POST">
-              <input type="button" value="Downgrade membership" onclick="getConfirmation();" />
+              <button type="submit" class="btn btn-danger">Downgrade membership</button>
             </form>
         <% } else if (currentUser.role === 2) { %> Admin
             

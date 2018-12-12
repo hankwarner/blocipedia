@@ -33,6 +33,18 @@
           <% }) %>
         <% } %>
 
+        <% if (currentUser) { %>
+          <h4>Collaborating on:</h4>
+          <% wikis.forEach((wiki) => { %>
+            <% wiki.collaborators.forEach((collaborator) => { %>
+              <% if(collaborator.userId === currentUser.id) { %>
+                <li class="list-group-item">
+                  <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                </li>
+              <% } %>
+            <% }) %>
+          <% }) %>
+        <% } %>
       </ul>
 
     </main>

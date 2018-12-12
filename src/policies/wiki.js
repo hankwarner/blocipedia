@@ -14,7 +14,7 @@ module.exports = class WikiPolicy extends ApplicationPolicy {
 
   edit() {
     if (this.user.id) {
-        return true
+      return true
     }
   }
 

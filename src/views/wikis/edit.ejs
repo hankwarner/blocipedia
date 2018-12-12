@@ -26,10 +26,24 @@
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
-          </div>  
+          </div>
         <% } %>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
+      <p>
+        <% include ../collaborators/add.ejs %>
+      </p>
+
+      <h3>Collaborators</h3>
+      <% if(wiki.collaborators) { %>
+
+        <% wiki.collaborators.forEach((collaborator) => { %>
+
+          <%- include("../collaborators/show.ejs", {collaborator}) %>
+        
+        <% }) %>
+
+      <% } %>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

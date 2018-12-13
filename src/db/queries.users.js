@@ -4,6 +4,33 @@ const Wiki = require("./models").Wiki;
 const bcrypt = require("bcryptjs");
 
 module.exports = {
+  getAllUsers(callback){
+    return User.all()
+    .then((users) => {
+      function sortByUsername(users) {
+        let swapped;
+        do {
+          swapped = false;
+          for (let i=0; i < users.length; i++) {
+            if (users[i] && users[i + 1] && users[i].username > users[i + 1].username) {
+              [users[i], users[i + 1]] = [users[i + 1], users[i]];
+              swapped = true;
+            }
+          }
+        } while (swapped);
+        
+        return users;
+      }
+
+      sortByUsername(users);
+      
+      callback(null, users);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+  
   createUser(newUser, callback){
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(newUser.password, salt);

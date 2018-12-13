@@ -1,4 +1,6 @@
 const wikiQueries = require("../db/queries.wikis.js");
+const userQueries = require("../db/queries.users.js");
+
 const Authorizer = require("../policies/wiki");
 const markdown = require("markdown").markdown;
 
@@ -6,9 +8,9 @@ module.exports = {
   index(req, res, next) {
     wikiQueries.getAllWikis((err, wikis) => {
         if(err){                
-            res.redirect(500, "static/index");
+          res.redirect(500, "static/index");
         } else {
-            res.render("wikis/index", {wikis});
+          res.render("wikis/index", {wikis});
         }
     })
   },
@@ -83,9 +85,15 @@ module.exports = {
         res.redirect(404, "/");
       } else {
         const authorized = new Authorizer(req.user, wiki).edit();
-        
+
         if (authorized) {
-          res.render("wikis/edit", {wiki});
+          userQueries.getAllUsers((err, users) => {
+            if(err) {
+              res.redirect(500, `/wikis/${req.params.id}/edit`);
+            } else {
+              res.render("wikis/edit", {wiki, users});
+            }
+          })
         } else {
           req.flash("You are not authorized to do that.")
           res.redirect(`/wikis/${req.params.id}`)

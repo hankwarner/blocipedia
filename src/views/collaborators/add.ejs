@@ -1,7 +1,13 @@
 <form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
   <div class="form-group">
     <label for="username">Add Collaborator</label>
-    <input type="text" class="form-control" name="username" aria-describedby="titleHelp" placeholder="Enter username">
+    <select name="username" placeholder="Select User">
+        <% wiki.collaborators.forEach((collaborator) => { %>
+          <option value="<%= collaborator.User.username %>"></option>
+        <% }) %>
+    </select>
+    
+    <!--<input type="text" class="form-control" name="username" aria-describedby="titleHelp" placeholder="Enter username">-->
   </div>
   <button type="submit" class="btn btn-primary">Add</button>
 </form>

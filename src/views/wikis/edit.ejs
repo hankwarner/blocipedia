@@ -31,7 +31,17 @@
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
       <p>
-        <% include ../collaborators/add.ejs %>
+        <form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
+          <div class="form-group">
+            <label for="username">Add Collaborator</label>
+            <select name="username" placeholder="Select User">
+              <% wiki.User.forEach((user) => { %>
+                <option value="<%=  %>"></option>
+              <% }) %>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
       </p>
 
       <h3>Collaborators</h3>

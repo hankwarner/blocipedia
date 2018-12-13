@@ -12,7 +12,7 @@ module.exports = {
     .then((user) => {
         Collaborator.findOne({
             where: {
-                userId: user.id, //this is causing an error, should look for username of collaborator
+                userId: user.id,
                 wikiId: req.params.wikiId
             }
         })

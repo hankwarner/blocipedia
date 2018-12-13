@@ -6,17 +6,34 @@ const Authorizer = require("../policies/wiki");
 
 module.exports = {
   getAllWikis(callback){
-      return Wiki.all({
-        include: [
-          {model: Collaborator, as: "collaborators"}
-        ]
-      })
-      .then((wikis) => {
-        callback(null, wikis);
-      })
-      .catch((err) => {
-        callback(err);
-      })
+    return Wiki.all({
+      include: [
+        {model: Collaborator, as: "collaborators"}
+      ]
+    })
+    .then((wikis) => {
+      function sortByUpdatedAtDate(wikis) {
+        let swapped;
+        do {
+          swapped = false;
+          for (let i=0; i < wikis.length; i++) {
+            if (wikis[i] && wikis[i + 1] && wikis[i].updatedAt < wikis[i + 1].updatedAt) {
+              [wikis[i], wikis[i + 1]] = [wikis[i + 1], wikis[i]];
+              swapped = true;
+            }
+          }
+        } while (swapped);
+        
+        return wikis;
+      }
+
+      sortByUpdatedAtDate(wikis);
+      
+      callback(null, wikis);
+    })
+    .catch((err) => {
+      callback(err);
+    })
   },
 
   addWiki(newWiki, callback){

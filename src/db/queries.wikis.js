@@ -1,6 +1,8 @@
 const User = require("./models").User;
 const Wiki = require("./models").Wiki;
 const Collaborator = require("./models").Collaborator;
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op
 
 const Authorizer = require("../policies/wiki");
 
@@ -39,7 +41,9 @@ module.exports = {
   searchByTitle(searchTitle, callback){
     return Wiki.findAll({
       where: {
-        title: searchTitle
+        title: {
+          [Op.iLike]: '%'+searchTitle+'%'
+        }
       }, include: [{
         model: Collaborator, as: "collaborators"
       }]

@@ -22,7 +22,7 @@ module.exports = {
         };
 
         userQueries.createUser(newUser, (err, user) => {
-            const msg = {
+            let msg = {
                 to: req.body.email,
                 from: 'noreply@blocipedia.com',
                 subject: 'Thanks for joining Blocipedia',
@@ -81,14 +81,23 @@ module.exports = {
             currency: 'usd',
             description: 'Premium membership',
             source: token,
-        })
+        });
 
         userQueries.upgradeRole(req, (err, result) => {
+            let msg = {
+                to: req.user.email,
+                from: 'noreply@blocipedia.com',
+                subject: 'Blocipedia Premium Membership Upgrade',
+                text: 'Thanks for becoming a Premium member of Blocipedia! You can now create and access the private Wiki collection!'
+            };
+
             if(err || result.id === undefined){
                 req.flash("notice", "No user found with that ID.");
                 res.redirect("users/show");
             } else {
                 req.flash("notice", "Thank you for becoming a Premium member!");
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                sgMail.send(msg);
                 res.render("users/show", {...result});
             }
         })
@@ -96,37 +105,30 @@ module.exports = {
     },
 
     downgrade(req, res, next){
-        if (confirm("Test")) {
-            const token = req.body.stripeToken;
+        const token = req.body.stripeToken;
 
-            const refund = stripe.refunds.create({
-                charge: 'ch_y4T9e59zXeMAP0Fq7a04',
-                amount: 1500,
-            });
-    
-            userQueries.downgradeRole(req, (err, result) => {
-                if(err){
-                    req.flash("notice", "No user found with that ID.");
-                    res.redirect("users/show");
-                } else {
-                    req.flash("notice", "Downgraded to standard membership");
-                    res.render("users/show", {...result});
-                }
-            })
-        } else {
-            req.flash("notice", "We're thrilled to see you stay! Downgrade was NOT processed.");
-            req.redirect("users/show");
-        }
+        const refund = stripe.refunds.create({
+            charge: 'ch_y4T9e59zXeMAP0Fq7a04',
+            amount: 1500,
+        });
 
         userQueries.downgradeRole(req, (err, result) => {
+            let msg = {
+                to: req.user.email,
+                from: 'noreply@blocipedia.com',
+                subject: "Sorry to see you go!",
+                text: "You've successfully downgraded your Blocipedia membership. All of your private wikis are now public."
+            };
+
             if(err){
                 req.flash("notice", "No user found with that ID.");
                 res.redirect("users/show");
             } else {
                 req.flash("notice", "Downgraded to standard membership");
-                res.render("users/show", {result});
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                sgMail.send(msg);
+                res.render("users/show", {...result});
             }
         })
-
     }
   }

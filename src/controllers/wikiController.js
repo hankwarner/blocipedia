@@ -57,16 +57,26 @@ module.exports = {
   },
 
   show(req, res, next){
-      wikiQueries.getWiki(req.params.id, (err, wiki) => {
-        var markdownWiki = wiki;
-        markdownWiki.body = markdown.toHTML(markdownWiki.body);
-        
-        if(err || markdownWiki == null){
-          res.redirect(404, "/");
-        } else {
-          res.render("wikis/show", {markdownWiki});
-        }
-      })
+    wikiQueries.getWiki(req.params.id, (err, wiki) => {
+      var markdownWiki = wiki;
+      markdownWiki.body = markdown.toHTML(markdownWiki.body);
+      
+      if(err || markdownWiki == null){
+        res.redirect(404, "/");
+      } else {
+        res.render("wikis/show", {markdownWiki});
+      }
+    })
+  },
+
+  search(req, res, next){
+    wikiQueries.searchByTitle(req.body.title, (err, results) => {
+      if(err){
+        res.redirect(500, `/`)
+      } else {
+        res.render(`wikis/search`, {results})
+      }
+    })
   },
 
   destroy(req, res, next){

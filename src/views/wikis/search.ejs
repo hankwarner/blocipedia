@@ -6,43 +6,55 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
 
-      <h1>Search results</h1>
+      <% if(results) { %>
+        <p>
+          <h1>Search results</h1>
+        </p>
 
-      <ul class="list-group">
+        <ul class="list-group">
 
-        <h4>Public</h4>
-        <% results.forEach((result) => { %>
-          <% if (result.private === false) { %>
-            <li class="list-group-item">
-              <a href="/wikis/<%= result.id %>"> <%= result.title %> </a>
-            </li>
-          <% } %>
-        <% }) %>
-
-        <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %>
-          <h4>Private</h4>
+          <h4>Public</h4>
           <% results.forEach((result) => { %>
-            <% if (result.private === true) { %>
+            <% if (result.private === false) { %>
               <li class="list-group-item">
                 <a href="/wikis/<%= result.id %>"> <%= result.title %> </a>
               </li>
             <% } %>
           <% }) %>
-        <% } %>
 
-        <% if (currentUser) { %>
-          <h4>Collaborating on:</h4>
-          <% results.forEach((result) => { %>
-            <% result.collaborators.forEach((collaborator) => { %>
-              <% if(collaborator.userId === currentUser.id) { %>
-                <li class="list-group-item">
-                  <a href="/wikis/<%= result.id %>"> <%= result.title %> </a>
-                </li>
-              <% } %>
-            <% }) %>
-          <% }) %>
-        <% } %>
-      </ul>
+          <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %>
+            <p>
+              <h4>Private</h4>
+              <% results.forEach((result) => { %>
+                <% if (result.private === true) { %>
+                  <li class="list-group-item">
+                    <a href="/wikis/<%= result.id %>"> <%= result.title %> </a>
+                  </li>
+                <% } %>
+              <% }) %>
+            </p>
+          <% } %>
+
+          <% if (currentUser) { %>
+            <p>
+              <h4>Collaborating on:</h4>
+              <% results.forEach((result) => { %>
+                <% result.collaborators.forEach((collaborator) => { %>
+                  <% if(collaborator.userId === currentUser.id) { %>
+                    <li class="list-group-item">
+                      <a href="/wikis/<%= result.id %>"> <%= result.title %> </a>
+                    </li>
+                  <% } %>
+                <% }) %>
+              <% }) %>
+            </p>
+          <% } %>
+        </ul>
+      <% } else { %>
+        <p>
+          <h1>No Wikis found</h1>
+        </p>
+      <% } %>
 
     </main>
   </body>

@@ -2,6 +2,7 @@
 <html>
   <head>
     <% include ../static/partials/head.ejs %>
+    <% include ../static/partials/headScripts.ejs %>
   </head>
   <body>
     <main class="container">
@@ -11,6 +12,7 @@
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
       <% } %>
+      <input type="button" name="sort" value="Sort by title" onclick='sortByTitle(wikis)'>
       <ul class="list-group">
 
         <h4>Public</h4>

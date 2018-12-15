@@ -3,18 +3,21 @@
   <head>
     <% include ../static/partials/head.ejs %>
     <script>    
-      var sortByTitle = function(sortedWikis) {
+
+      var sortByTitle = function(wikis) {
           let swapped;
           do {
             swapped = false;
-            for (let i=0; i < sortedWikis.length; i++) {
-              if (sortedWikis[i] && sortedWikis[i + 1] && sortedWikis[i].title < sortedWikis[i + 1].title) {
-                [sortedWikis[i], sortedWikis[i + 1]] = [sortedWikis[i + 1], sortedWikis[i]];
+            for (let i=0; i < wikis.length; i++) {
+              if (wikis[i] && wikis[i + 1] && wikis[i].title < wikis[i + 1].title) {
+                [wikis[i], wikis[i + 1]] = [wikis[i + 1], wikis[i]];
                 swapped = true;
               }
             }
           } while (swapped);
           
+          var sortedWikis = wikis;
+          debugger
           return sortedWikis;
       }
   
@@ -28,17 +31,27 @@
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
       <% } %>
-      <input type="button" name="sort" value="Sort by title" onclick="sortByTitle(`<%= wikis %>`)">
+      <input type="button" name="sort" value="Sort by title" onclick="sortByTitle(`<%- wikis %>`)">
       <ul class="list-group">
 
         <h4>Public</h4>
-        <% wikis.forEach((wiki) => { %>
-          <% if (wiki.private === false) { %>
-            <li class="list-group-item">
-              <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-            </li>
-          <% } %>
-        <% }) %>
+        <% if(typeof sortedWikis == "undefined") { %>
+          <% wikis.forEach((wiki) => { %>
+            <% if (wiki.private === false) { %>
+              <li class="list-group-item">
+                <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              </li>
+            <% } %>
+          <% }) %>
+        <% } else { %>
+          <% sortedWikis.forEach((wiki) => { %>
+            <% if (wiki.private === false) { %>
+              <li class="list-group-item">
+                <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              </li>
+            <% } %>
+          <% }) %>
+        <% } %>
 
         <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %>
           <h4>Private</h4>

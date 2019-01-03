@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     body: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(10000),
       allowNull: false
     },
     private: {

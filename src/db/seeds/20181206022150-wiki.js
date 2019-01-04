@@ -7,7 +7,7 @@ let wikis = [];
 for(let i = 1 ; i <= 15 ; i++){
   wikis.push({
     title: faker.hacker.noun(),
-    body: faker.hacker.phrase(),
+    body: faker.lorem.paragraphs(15),
     private: false,
     userId: 1,
     createdAt: new Date(),
@@ -18,7 +18,7 @@ for(let i = 1 ; i <= 15 ; i++){
 for(let i = 1 ; i <= 15 ; i++){
   wikis.push({
     title: faker.hacker.noun(),
-    body: faker.hacker.phrase(),
+    body: faker.lorem.paragraphs(20),
     private: true,
     userId: 1,
     createdAt: new Date(),

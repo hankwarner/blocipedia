@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const CronJob = require('../lib/cron.js').CronJob;
+var CronJob = require('cron').CronJob;
 const staticController = require("../controllers/staticController");
 
 router.get("/", staticController.index);

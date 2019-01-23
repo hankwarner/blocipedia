@@ -31,6 +31,7 @@
     "dotenv": "^5.0.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-favicon": "^2.0.1",
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "express-validator": "^5.0.2",
@@ -43,6 +44,7 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.6",
     "sequelize-cli": "^5.4.0",
+    "serve-favicon": "^2.5.0",
     "stripe": "^6.18.0"
   }
 }

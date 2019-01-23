@@ -11,22 +11,22 @@
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
       <% } %>
-      <ul class="list-group" id="wiki-list">
+      <ul class="list-group" id="content-list">
 
-        <h4>Public</h4>
+        <h4 class="wiki-header">Public</h4>
         <% wikis.forEach((wiki) => { %>
           <% if (wiki.private === false) { %>
-            <li class="list-group-item">
+            <li class="list-group-item" id="public-wiki-list">
               <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
             </li>
           <% } %>
         <% }) %>
 
         <% if (currentUser && (currentUser.isAdmin() || currentUser.isPremium())) { %>
-          <h4>Private</h4>
+          <h4 class="wiki-header">Private</h4>
           <% wikis.forEach((wiki) => { %>
             <% if (wiki.private === true) { %>
-              <li class="list-group-item">
+              <li class="list-group-item" id="private-wiki-list">
                 <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
               </li>
             <% } %>
@@ -34,7 +34,7 @@
         <% } %>
 
         <% if (currentUser) { %>
-          <h4>Collaborating on:</h4>
+          <h4 class="wiki-header">Collaborating on:</h4>
           <% wikis.forEach((wiki) => { %>
             <% wiki.collaborators.forEach((collaborator) => { %>
               <% if(collaborator.userId === currentUser.id) { %>

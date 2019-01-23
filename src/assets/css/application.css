@@ -8,6 +8,18 @@ body {
   margin-left: 2%;
 }
 
-#wiki-list {
-  margin-bottom: 7%;
+.wiki-header {
+  margin-top: 3%;
+}
+
+#content-list {
+  margin-bottom: 5%;
+}
+
+#public-wiki-list {
+  margin-bottom: 1%;
+}
+
+#private-wiki-list {
+  margin-bottom: 1%;
 }

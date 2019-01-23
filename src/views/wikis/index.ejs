@@ -11,7 +11,7 @@
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
       <% } %>
-      <ul class="list-group">
+      <ul class="list-group" id="wiki-list">
 
         <h4>Public</h4>
         <% wikis.forEach((wiki) => { %>

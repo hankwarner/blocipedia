@@ -6,7 +6,7 @@ const appConfig = require("./config/main-config.js");
 const routeConfig = require("./config/route-config.js");
 
 appConfig.init(app, express);
-app.use(express.favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 routeConfig.init(app);
 

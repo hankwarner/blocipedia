@@ -18,18 +18,18 @@ If you would like to view, create and edit private wikis, upgrade to a premium m
 
 ### View Wikis
 
-Click the 'Wikis' link in the navigation bar to view the wiki board. Basic members will only be able to see the Public Wikis section, and Premium members will see an additional section called Private Wikis. Additionally, all signed-in users will see a section titled 'Collaborting on:' which displays any wikis that you are listed as a collaborators.
+Click the 'Wikis' link in the navigation bar to view the wiki board. Wikis are sorted to show the most recently created/edited wikis at the top. Basic members will only be able to see the Public Wikis section, and Premium members will see an additional section called Private Wikis. Additionally, all signed-in users will see a section titled 'Collaborting on:' which displays any wikis which you are listed as a collaborator.
 
 
 ### Create a Wiki
 
-Signed in users will see a green 'New Wiki' button on the Wikis index view. Click it to get started. Basic members will see a Title and Body field in which to write their wiki, and Premium members will see two additional input fields: 'Make Private' and 'Add Collaborator'. The Add Collaborator input is a dropdown containing all of the site's users. Premium members are allowed to add Basic members as collaborators on private wikis, and the public user will be able to view and edit it. 
+Signed in users will see a green 'New Wiki' button on the wikis index view. Click it to get started. Basic members will see a Title and Body field in which to write their wiki content, and Premium members will see two additional input fields: 'Make Private' and 'Add Collaborator'. The 'Add Collaborator' input is a dropdown containing all of the site's users. Premium members are allowed to add Basic members as collaborators on private wikis, and the Basic user will then be able to view and edit it. 
 
 **Wikis are Markdown compatible**. Spice up your wiki using Markdown syntax to add rich text. 
 
 
 ### Search
-Use the search tool in the top right corner of the naviation bar to search for wikis by title. 
+Use the search tool in the top right corner of the navigation bar to search for wikis by title.
 
 
 ## Testing

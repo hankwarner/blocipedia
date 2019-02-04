@@ -27,10 +27,23 @@ Signed in users will see a green 'New Wiki' button on the wikis index view. Clic
 
 **Wikis are Markdown compatible**. Spice up your wiki using Markdown syntax to add rich text. 
 
-
 ### Search
 Use the search tool in the top right corner of the navigation bar to search for wikis by title.
 
 
 ## Testing
-Unit and integration tests are provided by Jasmine and can be found in the `spec` folder. 
+Unit and integration tests are provided by Jasmine and can be found in the `spec` folder
+
+
+## npm Packages/Dependancies:
+For a full list of dependancies, visit the `package.json` file. Highlights include:
+
+* PostgreSQL for modeling data in a relational database.
+* Sequelize, a promise-based ORM, to handle tasks such as defining models, setting up associations between models, and generating migrations.
+* Express for routing and handling middleware.
+* Stripe to charge users before switching their account role from standard to premium.
+* EJS (Embedded JavaScript) is the templating engine which renders the client view. It uses JavaScript to generate HTML using simple syntax with fast compilation and rendering times.
+* Passport for user authentication. Bloccit implements a stateful session-based authentication system using cookies.
+* Bcrypt for encrypting user passwords.
+* dotenv for storing environment variables and sensitive API keys.
+* Faker for providing the lovely seed data that you see in the production environment.

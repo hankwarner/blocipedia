@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require("express");
 const app = express();
 const favicon = require('express-favicon');
